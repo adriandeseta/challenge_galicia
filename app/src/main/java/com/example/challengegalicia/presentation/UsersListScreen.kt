@@ -1,6 +1,5 @@
 package com.example.challengegalicia.presentation
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -31,6 +30,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,7 +39,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -67,9 +66,9 @@ fun UsersListScreen(
     ) {
         OutlinedTextField(
             shape = RoundedCornerShape(50.dp),
-            value = "",
-            onValueChange = {},
-            placeholder = { Text(text = "Buscar por país...") },
+            value = viewModel.searchQuery.collectAsState().value,
+            onValueChange = { viewModel.onSearchQueryChange(it) },
+            placeholder = { Text(text = "Buscar por país o nombre...") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
@@ -87,7 +86,7 @@ fun UsersListScreen(
 
         Box(modifier = Modifier.fillMaxSize()) {
             UserList(users) { clickedUser ->
-                sharedViewModel.selectUser(clickedUser) // guardamos en shared VM
+                sharedViewModel.selectUser(clickedUser)
                 navController.navigate(MainScreens.Detail.route)
             }
         }
@@ -155,7 +154,7 @@ fun ListItem(
                     painter = rememberImagePainter(data = userModel.picture.medium),
                     contentDescription = null,
                     modifier = Modifier
-                        .width(100.dp) // menos ancho
+                        .width(100.dp)
                         .fillMaxHeight()
                         .clip(RoundedCornerShape(8.dp)),
                     contentScale = ContentScale.Crop
