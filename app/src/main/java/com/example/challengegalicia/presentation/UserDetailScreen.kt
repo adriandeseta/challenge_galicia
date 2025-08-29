@@ -71,7 +71,7 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
             text = "Nombre:",
-            fontSize = 24.sp,
+            fontSize = 22.sp,
             fontWeight = FontWeight.Medium
         )
 
@@ -85,13 +85,13 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
             fontWeight = FontWeight.Medium
         )
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(12.dp))
 
         CustomText(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
             text = "Apellido:",
-            fontSize = 24.sp,
+            fontSize = 22.sp,
             fontWeight = FontWeight.Medium
         )
 
@@ -105,13 +105,13 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
             fontWeight = FontWeight.Medium
         )
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(12.dp))
 
         CustomText(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
             text = "Dirección:",
-            fontSize = 24.sp,
+            fontSize = 22.sp,
             fontWeight = FontWeight.Medium
         )
 
@@ -129,13 +129,13 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
             fontWeight = FontWeight.Medium
         )
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(12.dp))
 
         CustomText(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
             text = "Fecha de nacimiento:",
-            fontSize = 24.sp,
+            fontSize = 22.sp,
             fontWeight = FontWeight.Medium
         )
 
@@ -154,7 +154,7 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
             text = "Telefono:",
-            fontSize = 24.sp,
+            fontSize = 22.sp,
             fontWeight = FontWeight.Medium
         )
 

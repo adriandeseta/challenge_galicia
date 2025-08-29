@@ -144,94 +144,95 @@ fun ListItem(
             contentColor = Color.Black
         )
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painter = rememberImagePainter(data = userModel.picture.medium),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .clip(RoundedCornerShape(8.dp)),
-                contentScale = ContentScale.Crop
-            )
-
-            Spacer(modifier = Modifier.width(12.dp))
-
-            Column(
-                modifier = Modifier.weight(2f),
-                verticalArrangement = Arrangement.Center
-            ) {
-                CustomText(
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Start,
-                    text = "Nombre: ${userModel.name.firstName.orPlaceholder("Desconocido")}",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                CustomText(
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Start,
-                    text = "Apellido: ${userModel.name.lastName.orPlaceholder("Desconocido")}",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-
-                CustomText(
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Start,
-                    text = "País: ${userModel.country.orPlaceholder("Desconocido")}",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-
-                CustomText(
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Start,
-                    text = "Edad: ${userModel.dob.age.orPlaceholder("Desconocido")}",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-
-                CustomText(
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Start,
-                    text = "Email: ${userModel.email.orPlaceholder("Desconocido")}",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium
-                )
-            }
-
+        Box(modifier = Modifier.fillMaxSize()) {
             Row(
-                modifier = Modifier.weight(1f),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.End
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Button(
-                    shape = CircleShape,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White.copy(0.4f),
-                        contentColor = Color.Black
-                    ),
-                    border = BorderStroke(1.dp, Color.Black),
-                    contentPadding = PaddingValues(0.dp),
-                    modifier = Modifier.size(40.dp),
-                    onClick = { /* Acción botón favorito */ }
+                Image(
+                    painter = rememberImagePainter(data = userModel.picture.medium),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .width(100.dp) // menos ancho
+                        .fillMaxHeight()
+                        .clip(RoundedCornerShape(8.dp)),
+                    contentScale = ContentScale.Crop
+                )
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Favorite,
-                        contentDescription = "Favorito",
-                        modifier = Modifier.size(25.dp),
-                        tint = Color.Black
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = "Nombre: ${userModel.name.firstName.orPlaceholder("Desconocido")}",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = "Apellido: ${userModel.name.lastName.orPlaceholder("Desconocido")}",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = "País: ${userModel.country.orPlaceholder("Desconocido")}",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = "Edad: ${userModel.dob.age.orPlaceholder("Desconocido")}",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = "Email:",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = userModel.email.orPlaceholder("Desconocido"),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
                     )
                 }
+            }
+
+            // Botón de favorito arriba a la derecha
+            Button(
+                shape = CircleShape,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White.copy(0.4f),
+                    contentColor = Color.Black
+                ),
+                contentPadding = PaddingValues(0.dp),
+                modifier = Modifier
+                    .size(40.dp)
+                    .align(Alignment.TopEnd)
+                    .padding(8.dp),
+                onClick = { /* Acción favorito */ }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Favorite,
+                    contentDescription = "Favorito",
+                    modifier = Modifier.size(25.dp),
+                    tint = Color.Black
+                )
             }
         }
     }
