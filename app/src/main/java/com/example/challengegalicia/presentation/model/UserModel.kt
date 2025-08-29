@@ -9,7 +9,7 @@ data class UserModel(
     val gender: String,
     val name: Name,
     val picture: UserImage,
-    val country: String,
+    val country: String?,
     val email: String,
     val dob: Dob,
     val location: UserLocation,

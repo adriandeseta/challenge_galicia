@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.example.challengegalicia.presentation.UsersListScreen
 import com.example.challengegalicia.ui.theme.ChallengeGaliciaTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,8 +23,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ChallengeGaliciaTheme {
-                UsersListScreen()
-            }
+                val navController = rememberNavController()
+                ChallengeNavigation(navController = navController)            }
         }
     }
 }

@@ -6,6 +6,12 @@ import retrofit2.http.Query
 
 interface UserListApiService {
 
-    @GET("/api/")
-    suspend fun getUsers(@Query("page") page: Int) : ResponseWrapper
+
+    @GET("api/")
+    suspend fun getUsers(
+        @Query("page") page: Int,
+        @Query("results") results: Int = 20,
+        @Query("seed") seed: String = "challenge"
+    ): ResponseWrapper
 }
+

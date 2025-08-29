@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://randomuser.me/api/"
+    private const val BASE_URL = "https://randomuser.me/"
 
     @Provides
     fun provideApiService(retrofit: Retrofit): UserListApiService =
