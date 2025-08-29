@@ -3,6 +3,7 @@ package com.example.challengegalicia.data
 import android.content.Context
 import androidx.room.Room
 import com.example.challengegalicia.data.dao.FavoriteUserDao
+import com.example.challengegalicia.data.database.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object DataBaseModule {
 
     @Provides
     @Singleton
