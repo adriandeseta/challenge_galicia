@@ -1,4 +1,4 @@
-package com.example.challengegalicia.presentation
+package com.example.challengegalicia.presentation.favorites
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -41,26 +41,6 @@ fun FavoritesScreen(favoritesViewModel: FavoritesViewModel) {
         items(favorites.size) { index ->
             val user = favorites[index]
             FavListItem(user)
-//            Row(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(8.dp),
-//                verticalAlignment = Alignment.CenterVertically
-//            ) {
-//                Image(
-//                    painter = rememberImagePainter(data = user.pictureUrl),
-//                    contentDescription = null,
-//                    modifier = Modifier
-//                        .size(60.dp)
-//                        .clip(RoundedCornerShape(8.dp))
-//                )
-//                Spacer(Modifier.width(12.dp))
-//                Column {
-//                    Text("${user.firstName} ${user.lastName}")
-//                    Text(user.country.orEmpty())
-//                    Text(user.email)
-//                }
-//            }
         }
     }
 }
@@ -123,6 +103,20 @@ fun FavListItem(user: FavoriteUserEntity) {
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Start,
                         text = "País: ${user.country.orPlaceholder("Desconocido")}",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = "Email: ${user.email.orPlaceholder("xxxx@xxxx.xxx")}",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = "Edad: ${user.age.orPlaceholder("Desconocido")}",
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium
                     )

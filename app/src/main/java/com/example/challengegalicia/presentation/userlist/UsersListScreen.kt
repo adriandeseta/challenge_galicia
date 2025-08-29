@@ -1,4 +1,4 @@
-package com.example.challengegalicia.presentation
+package com.example.challengegalicia.presentation.userlist
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -49,6 +49,8 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.rememberImagePainter
 import com.example.challengegalicia.MainScreens
 import com.example.challengegalicia.data.FavoriteUserEntity
+import com.example.challengegalicia.presentation.favorites.FavoritesViewModel
+import com.example.challengegalicia.presentation.SharedUserViewModel
 import com.example.challengegalicia.presentation.model.UserModel
 import com.example.challengegalicia.utils.CustomText
 import com.example.challengegalicia.utils.orPlaceholder
@@ -231,10 +233,23 @@ fun ListItem(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium
                     )
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = "Email: ${userModel.email.orPlaceholder("xxxx@xxxx.xxx")}",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = "Edad: ${userModel.dob.age.orPlaceholder("Desconocido")}",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
+                    )
                 }
             }
 
-            // Botón de favorito arriba a la derecha
             IconButton(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
@@ -246,7 +261,9 @@ fun ListItem(
                             firstName = userModel.name.firstName,
                             lastName = userModel.name.lastName,
                             country = userModel.country,
-                            pictureUrl = userModel.picture.medium
+                            pictureUrl = userModel.picture.medium,
+                            age = userModel.dob.age.toString(),
+                            phone = userModel.phone,
                         )
                         favoritesViewModel.addFavorite(favUser)
                         Toast.makeText(

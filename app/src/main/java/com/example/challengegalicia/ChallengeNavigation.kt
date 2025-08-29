@@ -5,12 +5,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.challengegalicia.presentation.FavoritesScreen
-import com.example.challengegalicia.presentation.FavoritesViewModel
+import com.example.challengegalicia.presentation.favorites.FavoritesScreen
+import com.example.challengegalicia.presentation.favorites.FavoritesViewModel
 import com.example.challengegalicia.presentation.SharedUserViewModel
-import com.example.challengegalicia.presentation.UserDetailScreen
-import com.example.challengegalicia.presentation.UserListViewModel
-import com.example.challengegalicia.presentation.UsersListScreen
+import com.example.challengegalicia.presentation.userdetail.UserDetailScreen
+import com.example.challengegalicia.presentation.userlist.UserListViewModel
+import com.example.challengegalicia.presentation.userlist.UsersListScreen
 
 @Composable
 fun ChallengeNavigation(

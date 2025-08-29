@@ -1,4 +1,4 @@
-package com.example.challengegalicia.presentation
+package com.example.challengegalicia.presentation.favorites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

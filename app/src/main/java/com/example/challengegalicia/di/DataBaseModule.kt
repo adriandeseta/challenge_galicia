@@ -1,4 +1,4 @@
-package com.example.challengegalicia.data
+package com.example.challengegalicia.di
 
 import android.content.Context
 import androidx.room.Room

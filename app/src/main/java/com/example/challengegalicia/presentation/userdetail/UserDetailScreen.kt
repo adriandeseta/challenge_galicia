@@ -1,4 +1,4 @@
-package com.example.challengegalicia.presentation
+package com.example.challengegalicia.presentation.userdetail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,6 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
+import com.example.challengegalicia.presentation.SharedUserViewModel
 import com.example.challengegalicia.utils.BoldText
 import com.example.challengegalicia.utils.CustomText
 import com.example.challengegalicia.utils.formatDateOrPlaceholder
