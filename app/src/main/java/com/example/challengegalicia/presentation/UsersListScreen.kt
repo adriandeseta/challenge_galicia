@@ -3,32 +3,14 @@ package com.example.challengegalicia.presentation
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -46,27 +28,51 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.rememberImagePainter
 import com.example.challengegalicia.MainScreens
+import com.example.challengegalicia.data.FavoriteUserEntity
 import com.example.challengegalicia.presentation.model.UserModel
 import com.example.challengegalicia.utils.CustomText
 import com.example.challengegalicia.utils.orPlaceholder
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UsersListScreen(
     viewModel: UserListViewModel,
     sharedViewModel: SharedUserViewModel,
+    favoritesViewModel: FavoritesViewModel,
     navController: NavHostController
 ) {
     val users = viewModel.users.collectAsLazyPagingItems()
+    val searchQuery = viewModel.searchQuery.collectAsState().value
 
     Column(
         modifier = Modifier
-            .padding(8.dp)
             .fillMaxSize()
             .background(Color.White)
     ) {
+        // TopAppBar con botón de favoritos
+        TopAppBar(
+            title = { Text("Usuarios") },
+            actions = {
+                IconButton(onClick = {
+                    navController.navigate(MainScreens.Favorites.route)
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Favoritos"
+                    )
+                }
+            },
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = Color.White,
+                titleContentColor = Color.Black,
+                actionIconContentColor = Color.Black
+            )
+        )
+
+        // Buscador
         OutlinedTextField(
             shape = RoundedCornerShape(50.dp),
-            value = viewModel.searchQuery.collectAsState().value,
+            value = searchQuery,
             onValueChange = { viewModel.onSearchQueryChange(it) },
             placeholder = { Text(text = "Buscar por país o nombre...") },
             modifier = Modifier
@@ -85,16 +91,33 @@ fun UsersListScreen(
         )
 
         Box(modifier = Modifier.fillMaxSize()) {
-            UserList(users) { clickedUser ->
-                sharedViewModel.selectUser(clickedUser)
-                navController.navigate(MainScreens.Detail.route)
-            }
+            UserList(
+                users = users,
+                onItemClick = { clickedUser ->
+                    sharedViewModel.selectUser(clickedUser)
+                    navController.navigate(MainScreens.Detail.route)
+                },
+                onFavoriteClick = { user ->
+                    val favUser = FavoriteUserEntity(
+                        email = user.email,
+                        firstName = user.name.firstName,
+                        lastName = user.name.lastName,
+                        country = user.country,
+                        pictureUrl = user.picture.medium
+                    )
+                    favoritesViewModel.addFavorite(favUser)
+                }
+            )
         }
     }
 }
 
 @Composable
-fun UserList(users: LazyPagingItems<UserModel>, onItemClick: (UserModel) -> Unit) {
+fun UserList(
+    users: LazyPagingItems<UserModel>,
+    onItemClick: (UserModel) -> Unit,
+    onFavoriteClick: (UserModel) -> Unit
+) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -118,7 +141,11 @@ fun UserList(users: LazyPagingItems<UserModel>, onItemClick: (UserModel) -> Unit
         } else {
             items(count = users.itemCount) { index ->
                 users[index]?.let { user ->
-                    ListItem(userModel = user, onClick = { onItemClick(user) })
+                    ListItem(
+                        userModel = user,
+                        onClick = { onItemClick(user) },
+                        onFavoriteClick = { onFavoriteClick(user) }
+                    )
                 }
             }
         }
@@ -128,7 +155,8 @@ fun UserList(users: LazyPagingItems<UserModel>, onItemClick: (UserModel) -> Unit
 @Composable
 fun ListItem(
     userModel: UserModel,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onFavoriteClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -155,7 +183,7 @@ fun ListItem(
                     contentDescription = null,
                     modifier = Modifier
                         .width(100.dp)
-                        .fillMaxHeight()
+                        .fillMaxSize()
                         .clip(RoundedCornerShape(8.dp)),
                     contentScale = ContentScale.Crop
                 )
@@ -173,7 +201,7 @@ fun ListItem(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium
                     )
-
+                    Spacer(Modifier.height(4.dp))
                     CustomText(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Start,
@@ -181,6 +209,7 @@ fun ListItem(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium
                     )
+                    Spacer(Modifier.height(4.dp))
                     CustomText(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Start,
@@ -188,6 +217,7 @@ fun ListItem(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium
                     )
+                    Spacer(Modifier.height(4.dp))
                     CustomText(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Start,
@@ -195,6 +225,7 @@ fun ListItem(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium
                     )
+                    Spacer(Modifier.height(4.dp))
                     CustomText(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Start,
@@ -224,7 +255,7 @@ fun ListItem(
                     .size(40.dp)
                     .align(Alignment.TopEnd)
                     .padding(8.dp),
-                onClick = { /* Acción favorito */ }
+                onClick = onFavoriteClick
             ) {
                 Icon(
                     imageVector = Icons.Default.Favorite,
