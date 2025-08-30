@@ -12,8 +12,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.challengegalicia.R
+import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_16
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
@@ -41,7 +43,7 @@ fun CustomText(
     text: String? = null,
     annotatedText: AnnotatedString? = null,
     textAlign: TextAlign = TextAlign.Start,
-    fontSize: TextUnit = 16.sp,
+    fontSize: TextUnit = FONT_SIZE_TITLE_16,
     color: Color = Color.Black,
     fontWeight: FontWeight = FontWeight.Normal,
     style: TextStyle = TextStyle.Default,
@@ -77,4 +79,18 @@ fun String?.formatDateOrPlaceholder(placeholder: String = "No disponible"): Stri
     } catch (e: Exception) {
         placeholder
     }
+}
+
+object Constants {
+    val FONT_SIZE_TITLE_24 = 24.sp
+    val FONT_SIZE_TITLE_16 = 16.sp
+    val ROUND_CORNER_12 = 12.dp
+    val PADDING_24 = 24.dp
+    val PADDING_8 = 8.dp
+    val SPACER_18 = 18.dp
+    val SPACER_12 = 12.dp
+    val SPACER_4 = 4.dp
+    val USER_LIST_IMAGE_SIZE = 70.dp
+    val USER_DETAIL_IMAGE_SIZE = 120.dp
+    val DIVIDER_LINE_THICKNESS = 1.dp
 }

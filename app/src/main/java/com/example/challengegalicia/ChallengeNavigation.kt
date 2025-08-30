@@ -24,6 +24,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.challengegalicia.utils.Constants.ROUND_CORNER_12
 import com.example.challengegalicia.utils.CustomText
 
 @Composable
@@ -109,7 +110,7 @@ fun CommonTopBar(
                         containerColor = azulOscuro,
                         contentColor = Color.White
                     ),
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(ROUND_CORNER_12),
                     elevation = ButtonDefaults.buttonElevation(4.dp),
                     border = BorderStroke(1.dp, Color.White),
                     modifier = Modifier.padding(end = 8.dp) // 👈 acá el padding derecho

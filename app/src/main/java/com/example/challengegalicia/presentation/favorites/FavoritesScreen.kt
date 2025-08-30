@@ -14,9 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -30,9 +27,16 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.example.challengegalicia.data.FavoriteUserEntity
+import com.example.challengegalicia.utils.Constants.DIVIDER_LINE_THICKNESS
+import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_16
+import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_24
+import com.example.challengegalicia.utils.Constants.PADDING_24
+import com.example.challengegalicia.utils.Constants.PADDING_8
+import com.example.challengegalicia.utils.Constants.SPACER_18
+import com.example.challengegalicia.utils.Constants.SPACER_4
+import com.example.challengegalicia.utils.Constants.USER_LIST_IMAGE_SIZE
 import com.example.challengegalicia.utils.CustomText
 import com.example.challengegalicia.utils.orPlaceholder
 
@@ -40,14 +44,18 @@ import com.example.challengegalicia.utils.orPlaceholder
 fun FavoritesScreen(favoritesViewModel: FavoritesViewModel) {
     val favorites = favoritesViewModel.favorites.collectAsState().value
 
-    LazyColumn(Modifier.background(Color.White).fillMaxSize()) {
+    LazyColumn(
+        Modifier
+            .background(Color.White)
+            .fillMaxSize()
+    ) {
         items(favorites.size) { index ->
             val user = favorites[index]
             FavListItem(user)
             Divider(
                 color = Color.Gray,
-                thickness = 1.dp,
-                modifier = Modifier.padding(horizontal = 8.dp)
+                thickness = DIVIDER_LINE_THICKNESS,
+                modifier = Modifier.padding(horizontal = PADDING_8)
             )
         }
     }
@@ -56,20 +64,15 @@ fun FavoritesScreen(favoritesViewModel: FavoritesViewModel) {
 @Composable
 fun FavListItem(user: FavoriteUserEntity) {
 
-    Card(
+    Column(
         modifier = Modifier
+            .padding(PADDING_24)
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 4.dp),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White,
-            contentColor = Color.Black
-        )
+            .background(Color.White)
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.Top
         ) {
@@ -80,67 +83,100 @@ fun FavListItem(user: FavoriteUserEntity) {
                     painter = rememberImagePainter(data = user.pictureUrl),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(70.dp)
+                        .size(USER_LIST_IMAGE_SIZE)
                         .clip(CircleShape),
                     contentScale = ContentScale.Crop
                 )
 
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(SPACER_18))
 
                 CustomText(
-                    text = "${user.firstName.orPlaceholder("Desconocido")} ${
+                    text = "${user.firstName.orPlaceholder("Desconocido")}\n${
                         user.lastName.orPlaceholder("Desconocido")
                     }",
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    fontSize = FONT_SIZE_TITLE_24,
+                    fontWeight = FontWeight.Medium,
+                    color = Color.Black,
                 )
             }
 
         }
+        Spacer(modifier = Modifier.height(SPACER_18))
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.White)
-                .padding(12.dp)
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
 
-                Spacer(modifier = Modifier.height(4.dp))
-
                 CustomText(
                     annotatedText = buildAnnotatedString {
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = Color.Black)) {
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black
+                            )
+                        ) {
                             append("Edad: ")
                         }
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Normal, color = Color.Black)) {
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Normal,
+                                color = Color.Black
+                            )
+                        ) {
                             append(user.age.orPlaceholder("Desconocido"))
                         }
                     },
-                    fontSize = 14.sp
+                    fontSize = FONT_SIZE_TITLE_16
                 )
+
+                Spacer(modifier = Modifier.height(SPACER_4))
+
                 CustomText(
                     annotatedText = buildAnnotatedString {
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = Color.Black)) {
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black
+                            )
+                        ) {
                             append("País: ")
                         }
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Normal, color = Color.Black)) {
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Normal,
+                                color = Color.Black
+                            )
+                        ) {
                             append(user.country.orPlaceholder("Desconocido"))
                         }
                     },
-                    fontSize = 14.sp
+                    fontSize = FONT_SIZE_TITLE_16
                 )
+
+                Spacer(modifier = Modifier.height(SPACER_4))
+
                 CustomText(
                     annotatedText = buildAnnotatedString {
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = Color.Black)) {
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black
+                            )
+                        ) {
                             append("Email: ")
                         }
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Normal, color = Color.Black)) {
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Normal,
+                                color = Color.Black
+                            )
+                        ) {
                             append(user.email.orPlaceholder("xxxx@xxxx.xxx"))
                         }
                     },
-                    fontSize = 14.sp
+                    fontSize = FONT_SIZE_TITLE_16
                 )
             }
 

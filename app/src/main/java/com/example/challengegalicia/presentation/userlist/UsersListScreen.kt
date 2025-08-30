@@ -21,8 +21,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -43,8 +41,6 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -54,6 +50,15 @@ import com.example.challengegalicia.data.FavoriteUserEntity
 import com.example.challengegalicia.presentation.SharedUserViewModel
 import com.example.challengegalicia.presentation.favorites.FavoritesViewModel
 import com.example.challengegalicia.presentation.model.UserModel
+import com.example.challengegalicia.utils.Constants.DIVIDER_LINE_THICKNESS
+import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_16
+import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_24
+import com.example.challengegalicia.utils.Constants.PADDING_24
+import com.example.challengegalicia.utils.Constants.PADDING_8
+import com.example.challengegalicia.utils.Constants.ROUND_CORNER_12
+import com.example.challengegalicia.utils.Constants.SPACER_18
+import com.example.challengegalicia.utils.Constants.SPACER_4
+import com.example.challengegalicia.utils.Constants.USER_LIST_IMAGE_SIZE
 import com.example.challengegalicia.utils.CustomText
 import com.example.challengegalicia.utils.figtreeFontFamily
 import com.example.challengegalicia.utils.orPlaceholder
@@ -74,13 +79,13 @@ fun UsersListScreen(
             .background(Color.White)
     ) {
         OutlinedTextField(
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(ROUND_CORNER_12),
             value = searchQuery,
             onValueChange = { viewModel.onSearchQueryChange(it) },
             placeholder = { Text(text = "Buscar por país o nombre...") },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(PADDING_8),
             singleLine = true,
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.White.copy(0.4F),
@@ -91,7 +96,10 @@ fun UsersListScreen(
                 focusedTextColor = Color(0xFF001F5B),
                 unfocusedTextColor = Color(0xFF001F5B).copy(0.4F)
             ),
-            textStyle = TextStyle(fontFamily = figtreeFontFamily)
+            textStyle = TextStyle(
+                fontFamily = figtreeFontFamily,
+                fontSize = FONT_SIZE_TITLE_16
+            )
         )
 
         Box(modifier = Modifier.fillMaxSize()) {
@@ -123,7 +131,7 @@ fun UserList(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(20.dp),
+                        .padding(PADDING_24),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -143,8 +151,8 @@ fun UserList(
                     )
                     Divider(
                         color = Color.Gray,
-                        thickness = 1.dp,
-                        modifier = Modifier.padding(horizontal = 8.dp)
+                        thickness = DIVIDER_LINE_THICKNESS,
+                        modifier = Modifier.padding(horizontal = PADDING_8)
                     )
                 }
             }
@@ -164,7 +172,7 @@ fun ListItem(
     Column(
         modifier = Modifier
             .clickable { onClick() }
-            .padding(24.dp)
+            .padding(PADDING_24)
             .fillMaxWidth()
             .background(Color.White)
     ) {
@@ -181,18 +189,18 @@ fun ListItem(
                     painter = rememberImagePainter(data = userModel.picture.medium),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(70.dp)
+                        .size(USER_LIST_IMAGE_SIZE)
                         .clip(CircleShape),
                     contentScale = ContentScale.Crop
                 )
 
-                Spacer(modifier = Modifier.width(18.dp))
+                Spacer(modifier = Modifier.width(SPACER_18))
 
                 CustomText(
                     text = "${userModel.name.firstName.orPlaceholder("Desconocido")}\n${
                         userModel.name.lastName.orPlaceholder("Desconocido")
                     }",
-                    fontSize = 24.sp,
+                    fontSize = FONT_SIZE_TITLE_24,
                     fontWeight = FontWeight.Medium,
                     color = Color.Black,
                 )
@@ -226,7 +234,9 @@ fun ListItem(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(16.dp))
+
+        Spacer(modifier = Modifier.height(SPACER_18))
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -252,10 +262,10 @@ fun ListItem(
                             append(userModel.dob.age.orPlaceholder("Desconocido"))
                         }
                     },
-                    fontSize = 16.sp
+                    fontSize = FONT_SIZE_TITLE_16
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(SPACER_4))
 
                 CustomText(
                     annotatedText = buildAnnotatedString {
@@ -276,10 +286,10 @@ fun ListItem(
                             append(userModel.country.orPlaceholder("Desconocido"))
                         }
                     },
-                    fontSize = 16.sp
+                    fontSize = FONT_SIZE_TITLE_16
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(SPACER_4))
 
                 CustomText(
                     annotatedText = buildAnnotatedString {
@@ -300,7 +310,7 @@ fun ListItem(
                             append(userModel.email.orPlaceholder("xxxx@xxxx.xxx"))
                         }
                     },
-                    fontSize = 16.sp
+                    fontSize = FONT_SIZE_TITLE_16
                 )
             }
 
