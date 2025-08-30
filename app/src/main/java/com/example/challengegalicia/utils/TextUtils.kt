@@ -38,7 +38,8 @@ val figtreeFontFamily = FontFamily(
 @Composable
 fun CustomText(
     modifier: Modifier = Modifier,
-    text: String,
+    text: String? = null,
+    annotatedText: AnnotatedString? = null,
     textAlign: TextAlign = TextAlign.Start,
     fontSize: TextUnit = 16.sp,
     color: Color = Color.Black,
@@ -46,8 +47,10 @@ fun CustomText(
     style: TextStyle = TextStyle.Default,
     textDecoration: TextDecoration = TextDecoration.None
 ) {
+    require(text != null || annotatedText != null) { "Debes pasar text o annotatedText" }
+
     Text(
-        text = text,
+        text = annotatedText ?: AnnotatedString(text!!),
         modifier = modifier,
         color = color,
         fontSize = fontSize,
@@ -59,76 +62,6 @@ fun CustomText(
     )
 }
 
-@Composable
-fun CustomTextLink(
-    modifier: Modifier = Modifier,
-    text: AnnotatedString,
-    textAlign: TextAlign = TextAlign.Start,
-    fontSize: TextUnit = 16.sp,
-    color: Color = Color.Black,
-    fontWeight: FontWeight = FontWeight.Normal,
-    style: TextStyle = TextStyle.Default
-) {
-    Text(
-        text = text,
-        modifier = modifier,
-        color = color,
-        fontSize = fontSize,
-        textAlign = textAlign,
-        fontFamily = figtreeFontFamily,
-        fontWeight = fontWeight,
-        style = style
-    )
-}
-
-// Versiones específicas (opcionales, para conveniencia)
-@Composable
-fun NormalText(
-    modifier: Modifier = Modifier,
-    text: String,
-    textAlign: TextAlign = TextAlign.Start,
-    fontSize: TextUnit = 16.sp,
-    color: Color = Color.Black
-) = CustomText(
-    modifier = modifier,
-    text = text,
-    textAlign = textAlign,
-    fontSize = fontSize,
-    color = color,
-    fontWeight = FontWeight.Normal
-)
-
-@Composable
-fun BoldText(
-    modifier: Modifier = Modifier,
-    text: String,
-    textAlign: TextAlign = TextAlign.Start,
-    fontSize: TextUnit = 16.sp,
-    color: Color = Color.Black
-) = CustomText(
-    modifier = modifier,
-    text = text,
-    textAlign = textAlign,
-    fontSize = fontSize,
-    color = color,
-    fontWeight = FontWeight.Bold
-)
-
-@Composable
-fun BlackText(
-    modifier: Modifier = Modifier,
-    text: String,
-    textAlign: TextAlign = TextAlign.Start,
-    fontSize: TextUnit = 16.sp,
-    color: Color = Color.Black
-) = CustomText(
-    modifier = modifier,
-    text = text,
-    textAlign = textAlign,
-    fontSize = fontSize,
-    color = color,
-    fontWeight = FontWeight.Black
-)
 
 fun String?.orPlaceholder(placeholder: String = "-"): String = this ?: placeholder
 fun Int?.orPlaceholder(placeholder: String = "-"): String = this?.toString() ?: placeholder
