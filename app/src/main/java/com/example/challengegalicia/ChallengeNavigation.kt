@@ -1,5 +1,6 @@
 package com.example.challengegalicia
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,7 +21,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.challengegalicia.utils.CustomText
 
 @Composable
 fun ChallengeNavigation(
@@ -74,17 +78,19 @@ fun CommonTopBar(
 
     TopAppBar(
         title = {
-            Text(
-                when (currentRoute) {
+            CustomText(
+                text = when (currentRoute) {
                     MainScreens.UserList.route -> "Usuarios"
-                    MainScreens.Detail.route -> "Detalle de Usuario"
+                    MainScreens.Detail.route -> "Perfil"
                     MainScreens.Favorites.route -> "Favoritos"
                     else -> ""
-                }
+                },
+                color = Color.White,
+                fontSize = 24.sp
+
             )
         },
         navigationIcon = {
-            // Solo mostrar back en pantallas que no sean la lista
             if (currentRoute != MainScreens.UserList.route) {
                 IconButton(onClick = { navController.popBackStack() }) {
                     Icon(
@@ -96,16 +102,18 @@ fun CommonTopBar(
             }
         },
         actions = {
-            // Solo mostrar botón "Ir a favoritos" en la lista
-            if (currentRoute == MainScreens.UserList.route) {
+            if (currentRoute == MainScreens.UserList.route || currentRoute == MainScreens.Detail.route) {
                 Button(
                     onClick = { navController.navigate(MainScreens.Favorites.route) },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White,
-                        contentColor = azulOscuro
+                        containerColor = azulOscuro,
+                        contentColor = Color.White
                     ),
                     shape = RoundedCornerShape(12.dp),
-                    elevation = ButtonDefaults.buttonElevation(4.dp)
+                    elevation = ButtonDefaults.buttonElevation(4.dp),
+                    border = BorderStroke(1.dp, Color.White),
+                    modifier = Modifier.padding(end = 8.dp) // 👈 acá el padding derecho
+
                 ) {
                     Text("Ir a favoritos")
                 }

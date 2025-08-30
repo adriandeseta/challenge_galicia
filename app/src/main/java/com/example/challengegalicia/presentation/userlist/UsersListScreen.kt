@@ -38,6 +38,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -54,6 +55,7 @@ import com.example.challengegalicia.presentation.SharedUserViewModel
 import com.example.challengegalicia.presentation.favorites.FavoritesViewModel
 import com.example.challengegalicia.presentation.model.UserModel
 import com.example.challengegalicia.utils.CustomText
+import com.example.challengegalicia.utils.figtreeFontFamily
 import com.example.challengegalicia.utils.orPlaceholder
 
 @Composable
@@ -88,7 +90,8 @@ fun UsersListScreen(
                 cursorColor = Color(0xFF001F5B),
                 focusedTextColor = Color(0xFF001F5B),
                 unfocusedTextColor = Color(0xFF001F5B).copy(0.4F)
-            )
+            ),
+            textStyle = TextStyle(fontFamily = figtreeFontFamily)
         )
 
         Box(modifier = Modifier.fillMaxSize()) {
@@ -158,21 +161,16 @@ fun ListItem(
     val context = LocalContext.current
     val isFavorite = favoritesViewModel.isFavorite(userModel.email).collectAsState(initial = false)
 
-    Card(
+    Column(
         modifier = Modifier
             .clickable { onClick() }
+            .padding(24.dp)
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 4.dp),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White,
-            contentColor = Color.Black
-        )
+            .background(Color.White)
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.Top
         ) {
@@ -188,15 +186,15 @@ fun ListItem(
                     contentScale = ContentScale.Crop
                 )
 
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(18.dp))
 
                 CustomText(
-                    text = "${userModel.name.firstName.orPlaceholder("Desconocido")} ${
+                    text = "${userModel.name.firstName.orPlaceholder("Desconocido")}\n${
                         userModel.name.lastName.orPlaceholder("Desconocido")
                     }",
                     fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    fontWeight = FontWeight.Medium,
+                    color = Color.Black,
                 )
             }
 
@@ -228,49 +226,81 @@ fun ListItem(
                 )
             }
         }
-
+        Spacer(modifier = Modifier.height(16.dp))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.White)
-                .padding(12.dp)
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
+
+                CustomText(
+                    annotatedText = buildAnnotatedString {
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black
+                            )
+                        ) {
+                            append("Edad: ")
+                        }
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Normal,
+                                color = Color.Black
+                            )
+                        ) {
+                            append(userModel.dob.age.orPlaceholder("Desconocido"))
+                        }
+                    },
+                    fontSize = 16.sp
+                )
 
                 Spacer(modifier = Modifier.height(4.dp))
 
                 CustomText(
                     annotatedText = buildAnnotatedString {
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = Color.Black)) {
-                            append("Edad: ")
-                        }
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Normal, color = Color.Black)) {
-                            append(userModel.dob.age.orPlaceholder("Desconocido"))
-                        }
-                    },
-                    fontSize = 14.sp
-                )
-                CustomText(
-                    annotatedText = buildAnnotatedString {
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = Color.Black)) {
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black
+                            )
+                        ) {
                             append("País: ")
                         }
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Normal, color = Color.Black)) {
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Normal,
+                                color = Color.Black
+                            )
+                        ) {
                             append(userModel.country.orPlaceholder("Desconocido"))
                         }
                     },
-                    fontSize = 14.sp
+                    fontSize = 16.sp
                 )
+
+                Spacer(modifier = Modifier.height(4.dp))
+
                 CustomText(
                     annotatedText = buildAnnotatedString {
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = Color.Black)) {
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black
+                            )
+                        ) {
                             append("Email: ")
                         }
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Normal, color = Color.Black)) {
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Normal,
+                                color = Color.Black
+                            )
+                        ) {
                             append(userModel.email.orPlaceholder("xxxx@xxxx.xxx"))
                         }
                     },
-                    fontSize = 14.sp
+                    fontSize = 16.sp
                 )
             }
 
