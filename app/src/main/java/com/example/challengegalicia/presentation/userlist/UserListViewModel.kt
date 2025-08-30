@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.filter
-import com.example.challengegalicia.data.UsersRepository
+import com.example.challengegalicia.data.remote.UsersRepository
 import com.example.challengegalicia.presentation.model.UserModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

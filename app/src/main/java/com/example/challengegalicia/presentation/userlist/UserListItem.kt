@@ -4,15 +4,7 @@ import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -21,6 +13,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,7 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import coil.compose.rememberImagePainter
 import com.example.challengegalicia.R
-import com.example.challengegalicia.data.FavoriteUserEntity
 import com.example.challengegalicia.presentation.favorites.FavoritesViewModel
 import com.example.challengegalicia.presentation.model.UserModel
 import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_16
@@ -53,7 +45,7 @@ fun UserListItem(
     favoritesViewModel: FavoritesViewModel
 ) {
     val context = LocalContext.current
-    val isFavorite = favoritesViewModel.isFavorite(userModel.email).collectAsState(initial = false)
+    val isFavorite by favoritesViewModel.isFavorite(userModel.uuid).collectAsState(initial = false)
 
     Column(
         modifier = Modifier
@@ -63,14 +55,11 @@ fun UserListItem(
             .background(Color.White)
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.Top
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Image(
                     painter = rememberImagePainter(data = userModel.picture.medium),
                     contentDescription = null,
@@ -94,39 +83,38 @@ fun UserListItem(
 
             IconButton(
                 onClick = {
-                    if (!isFavorite.value) {
-                        val favUser = FavoriteUserEntity(
-                            email = userModel.email,
-                            firstName = userModel.name.firstName,
-                            lastName = userModel.name.lastName,
-                            country = userModel.country,
-                            pictureUrl = userModel.picture.medium,
-                            age = userModel.dob.age.toString(),
-                            phone = userModel.phone,
-                        )
-                        favoritesViewModel.addFavorite(favUser)
+                    if (isFavorite) {
+                        favoritesViewModel.removeFavorite(userModel.uuid)
                         Toast.makeText(
                             context,
-                            context.getString(R.string.user_list_favorites_message),
+                            context.getString(R.string.user_list_remove_favorites_message),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        favoritesViewModel.addFavorite(userModel)
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.user_list_add_favorites_message),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
             ) {
                 Icon(
-                    imageVector = if (isFavorite.value) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                    contentDescription = stringResource(R.string.user_list_favorite_content_description),
-                    tint = if (isFavorite.value) Color.Red else Color.Gray
+                    imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                    contentDescription = if (isFavorite) stringResource(
+                        R.string.user_list_add_remove_favorites_placeholder_remove
+                    )
+                    else stringResource(
+                        R.string.user_list_add_remove_favorites_placeholder_add
+                    ), tint = if (isFavorite) Color.Red else Color.Gray
                 )
             }
         }
 
         Spacer(modifier = Modifier.height(SPACER_18))
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
+        Row(modifier = Modifier.fillMaxWidth()) {
             Column(modifier = Modifier.fillMaxWidth()) {
 
                 CustomText(
@@ -199,7 +187,6 @@ fun UserListItem(
                     fontSize = FONT_SIZE_TITLE_16
                 )
             }
-
         }
     }
 }

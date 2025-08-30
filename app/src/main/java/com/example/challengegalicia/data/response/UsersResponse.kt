@@ -12,13 +12,15 @@ data class UsersResponse(
     @SerializedName("dob") val dob: Dob,
     @SerializedName("location") val location: UserLocation,
     @SerializedName("phone") val phone: String,
-){
-    fun toPresentation():UserModel{
+    @SerializedName("login") val login: Login,
+) {
+    fun toPresentation(): UserModel {
         return UserModel(
+            uuid = login.uuid,
             gender = gender,
             name = name,
             picture = picture,
-            country = country ?: "Unknown",
+            country = country ?: "-",
             email = email,
             dob = dob,
             location = location,
@@ -51,4 +53,9 @@ data class UserLocation(
 data class Street(
     @SerializedName("number") val number: Int,
     @SerializedName("name") val name: String,
+)
+
+data class Login(
+    @SerializedName("uuid") val uuid: String,
+    @SerializedName("username") val username: String
 )

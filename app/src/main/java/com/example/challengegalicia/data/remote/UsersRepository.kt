@@ -1,8 +1,10 @@
-package com.example.challengegalicia.data
+package com.example.challengegalicia.data.remote
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.example.challengegalicia.data.UserListApiService
+import com.example.challengegalicia.data.UserPagingSource
 import com.example.challengegalicia.presentation.model.UserModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

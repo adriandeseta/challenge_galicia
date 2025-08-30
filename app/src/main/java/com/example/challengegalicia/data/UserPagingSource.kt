@@ -28,7 +28,6 @@ class UserPagingSource @Inject constructor(
         return try {
             Log.d(TAG, "=== Loading page $page ===")
 
-            // Llamada a la API
             val response = api.getUsers(
                 page = page,
                 results = PAGE_SIZE,
@@ -38,7 +37,6 @@ class UserPagingSource @Inject constructor(
 
             Log.d(TAG, "Users received: ${users.size}")
 
-            // Mostrar los nombres de cada usuario recibido
             users.forEach { user ->
                 Log.d(TAG, "User: ${user.name.firstName} ${user.name.lastName}")
             }

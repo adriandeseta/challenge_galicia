@@ -70,7 +70,10 @@ fun ChallengeNavigation(
                     )
                 }
                 composable(MainScreens.Detail.route) {
-                    UserDetailScreen(sharedViewModel)
+                    UserDetailScreen(
+                        sharedViewModel = sharedViewModel,
+                        favoritesViewModel = favoritesViewModel
+                    )
                 }
                 composable(MainScreens.Favorites.route) {
                     FavoritesScreen(favoritesViewModel)

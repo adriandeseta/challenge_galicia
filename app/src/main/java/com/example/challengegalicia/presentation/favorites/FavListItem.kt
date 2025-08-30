@@ -25,7 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import coil.compose.rememberImagePainter
 import com.example.challengegalicia.R
-import com.example.challengegalicia.data.FavoriteUserEntity
+import com.example.challengegalicia.data.local.FavoriteUserEntity
 import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_16
 import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_24
 import com.example.challengegalicia.utils.Constants.PADDING_24

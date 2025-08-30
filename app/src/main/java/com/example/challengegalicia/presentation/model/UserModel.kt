@@ -6,6 +6,7 @@ import com.example.challengegalicia.data.response.UserImage
 import com.example.challengegalicia.data.response.UserLocation
 
 data class UserModel(
+    val uuid: String,
     val gender: String,
     val name: Name,
     val picture: UserImage,

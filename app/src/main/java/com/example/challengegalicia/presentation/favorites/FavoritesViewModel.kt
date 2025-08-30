@@ -2,8 +2,10 @@ package com.example.challengegalicia.presentation.favorites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.challengegalicia.data.FavoriteUserEntity
-import com.example.challengegalicia.data.FavoriteUserRepository
+import com.example.challengegalicia.data.local.FavoriteUserEntity
+import com.example.challengegalicia.data.local.FavoriteUserRepository
+import com.example.challengegalicia.data.toFavoriteUserEntity
+import com.example.challengegalicia.presentation.model.UserModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -22,17 +24,17 @@ class FavoritesViewModel @Inject constructor(
         repository.getFavorites()
             .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    val favoriteUsers: Flow<List<FavoriteUserEntity>> = repository.getFavorites()
-
-    fun addFavorite(user: FavoriteUserEntity) {
+    fun addFavorite(user: UserModel) {
         viewModelScope.launch {
-            repository.addFavorite(user)
+            repository.addFavorite(user.toFavoriteUserEntity())
         }
     }
 
-    fun isFavorite(email: String): Flow<Boolean> {
-        return favoriteUsers.map { list ->
-            list.any { it.email == email }
+    fun removeFavorite(uuid: String) {
+        viewModelScope.launch {
+            repository.removeFavorite(uuid)
         }
     }
+
+    fun isFavorite(uuid: String) = repository.isFavorite(uuid)
 }

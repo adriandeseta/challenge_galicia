@@ -1,11 +1,11 @@
-package com.example.challengegalicia.data
+package com.example.challengegalicia.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorite_users")
 data class FavoriteUserEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @PrimaryKey val uuid: String,
     val email: String,
     val firstName: String,
     val lastName: String,
