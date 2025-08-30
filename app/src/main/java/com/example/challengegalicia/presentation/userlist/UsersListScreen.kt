@@ -4,32 +4,13 @@ import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -55,7 +36,6 @@ import com.example.challengegalicia.presentation.model.UserModel
 import com.example.challengegalicia.utils.CustomText
 import com.example.challengegalicia.utils.orPlaceholder
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UsersListScreen(
     viewModel: UserListViewModel,
@@ -71,29 +51,8 @@ fun UsersListScreen(
             .fillMaxSize()
             .background(Color.White)
     ) {
-        // TopAppBar con botón de favoritos
-        TopAppBar(
-            title = { Text("Usuarios") },
-            actions = {
-                IconButton(onClick = {
-                    navController.navigate(MainScreens.Favorites.route)
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = "Favoritos"
-                    )
-                }
-            },
-            colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = Color.White,
-                titleContentColor = Color.Black,
-                actionIconContentColor = Color.Black
-            )
-        )
-
-        // Buscador
         OutlinedTextField(
-            shape = RoundedCornerShape(50.dp),
+            shape = RoundedCornerShape(12.dp),
             value = searchQuery,
             onValueChange = { viewModel.onSearchQueryChange(it) },
             placeholder = { Text(text = "Buscar por país o nombre...") },
@@ -104,11 +63,11 @@ fun UsersListScreen(
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.White.copy(0.4F),
                 unfocusedContainerColor = Color.White.copy(0.4F),
-                focusedIndicatorColor = Color.Black,
-                unfocusedIndicatorColor = Color.Black,
-                cursorColor = Color.Black,
-                focusedTextColor = Color.Black,
-                unfocusedTextColor = Color.Black.copy(0.4F)
+                focusedIndicatorColor = Color(0xFF001F5B),
+                unfocusedIndicatorColor = Color(0xFF001F5B),
+                cursorColor = Color(0xFF001F5B),
+                focusedTextColor = Color(0xFF001F5B),
+                unfocusedTextColor = Color(0xFF001F5B).copy(0.4F)
             )
         )
 
@@ -180,7 +139,7 @@ fun ListItem(
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 4.dp)
             .shadow(8.dp, RoundedCornerShape(12.dp))
-            .height(170.dp),
+            .height(200.dp),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.White,
@@ -208,45 +167,87 @@ fun ListItem(
 
                 Column(
                     modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.Center
+                    verticalArrangement = Arrangement.Top
                 ) {
                     CustomText(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Start,
-                        text = "Nombre: ${userModel.name.firstName.orPlaceholder("Desconocido")}",
+                        text = "Nombre",
                         fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Bold
                     )
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = userModel.name.firstName.orPlaceholder("Desconocido"),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal
+                    )
+
                     Spacer(Modifier.height(4.dp))
                     CustomText(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Start,
-                        text = "Apellido: ${userModel.name.lastName.orPlaceholder("Desconocido")}",
+                        text = "Apellido",
                         fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Bold
                     )
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = userModel.name.lastName.orPlaceholder("Desconocido"),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal
+                    )
+
                     Spacer(Modifier.height(4.dp))
                     CustomText(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Start,
-                        text = "País: ${userModel.country.orPlaceholder("Desconocido")}",
+                        text = "País",
                         fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Bold
                     )
                     CustomText(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Start,
-                        text = "Email: ${userModel.email.orPlaceholder("xxxx@xxxx.xxx")}",
+                        text = userModel.country.orPlaceholder("Desconocido"),
                         fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Normal
+                    )
+
+                    Spacer(Modifier.height(4.dp))
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = "Edad",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
                     )
                     CustomText(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Start,
-                        text = "Edad: ${userModel.dob.age.orPlaceholder("Desconocido")}",
+                        text = userModel.dob.age.orPlaceholder("Desconocido"),
                         fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Normal
                     )
+
+                    Spacer(Modifier.height(4.dp))
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = "Email",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    CustomText(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        text = userModel.email.orPlaceholder("xxxx@xxxx.xxx"),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal
+                    )
+
                 }
             }
 

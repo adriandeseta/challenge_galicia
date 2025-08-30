@@ -47,12 +47,6 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        BoldText(
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Start,
-            text = "USER DETAIL",
-            fontSize = 55.sp
-        )
 
         Spacer(Modifier.height(10.dp))
 
@@ -71,9 +65,9 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
         CustomText(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
-            text = "Nombre:",
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Medium
+            text = "Nombre",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
         )
 
         Spacer(Modifier.height(4.dp))
@@ -82,8 +76,8 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
             text = user.name.firstName.orPlaceholder("Desconocido"),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Medium
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Normal
         )
 
         Spacer(Modifier.height(12.dp))
@@ -91,9 +85,9 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
         CustomText(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
-            text = "Apellido:",
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Medium
+            text = "Apellido",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
         )
 
         Spacer(Modifier.height(4.dp))
@@ -102,8 +96,8 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
             text = user.name.lastName.orPlaceholder("Desconocido"),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Medium
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Normal
         )
 
         Spacer(Modifier.height(12.dp))
@@ -111,9 +105,9 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
         CustomText(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
-            text = "Dirección:",
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Medium
+            text = "Dirección",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
         )
 
         Spacer(Modifier.height(4.dp))
@@ -126,8 +120,8 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
                     "-"
                 )
             }",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Medium
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Normal
         )
 
         Spacer(Modifier.height(12.dp))
@@ -136,8 +130,8 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
             text = "Fecha de nacimiento:",
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Medium
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
         )
 
         Spacer(Modifier.height(4.dp))
@@ -146,17 +140,17 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
             text = user.dob.date.formatDateOrPlaceholder(),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Medium
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Normal
         )
         Spacer(Modifier.height(16.dp))
 
         CustomText(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
-            text = "Telefono:",
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Medium
+            text = "Telefono",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
         )
 
         Spacer(Modifier.height(4.dp))
@@ -165,8 +159,8 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
             text = user.phone.orPlaceholder("-"),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Medium
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Normal
         )
     }
 }

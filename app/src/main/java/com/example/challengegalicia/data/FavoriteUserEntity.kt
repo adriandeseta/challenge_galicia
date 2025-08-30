@@ -2,7 +2,6 @@ package com.example.challengegalicia.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.challengegalicia.data.response.Dob
 
 @Entity(tableName = "favorite_users")
 data class FavoriteUserEntity(
