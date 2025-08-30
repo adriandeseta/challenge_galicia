@@ -27,7 +27,6 @@ private val figtreeLight = Font(R.font.figtree_light, FontWeight.Light)
 private val figtreeMedium = Font(R.font.figtree_medium, FontWeight.Medium)
 private val figtreeRegular = Font(R.font.figtree_regular, FontWeight.Normal)
 
-// Familia de fuentes
 val figtreeFontFamily = FontFamily(
     figtreeBlack,
     figtreeBold,

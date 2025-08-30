@@ -16,7 +16,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             ChallengeGaliciaTheme {
                 val navController = rememberNavController()
-                ChallengeNavigation(navController = navController)            }
+                ChallengeNavigation(navController = navController)
+            }
         }
     }
 }
