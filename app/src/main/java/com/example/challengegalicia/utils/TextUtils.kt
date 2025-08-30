@@ -93,4 +93,5 @@ object Constants {
     val USER_LIST_IMAGE_SIZE = 70.dp
     val USER_DETAIL_IMAGE_SIZE = 120.dp
     val DIVIDER_LINE_THICKNESS = 1.dp
+    const val DEFAULT_USER_PICTURE = "https://placehold.co/400"
 }

@@ -20,12 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
+import com.example.challengegalicia.R
 import com.example.challengegalicia.presentation.SharedUserViewModel
+import com.example.challengegalicia.utils.Constants.DEFAULT_USER_PICTURE
 import com.example.challengegalicia.utils.Constants.DIVIDER_LINE_THICKNESS
 import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_16
 import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_24
@@ -43,12 +44,13 @@ import com.example.challengegalicia.utils.orPlaceholder
 fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
     val user = sharedViewModel.selectedUser.value
 
+
     if (user == null) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CustomText(
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
-                text = "No se pudo cargar el usuario",
+                text = stringResource(R.string.user_detail_empty_state_title),
                 fontSize = FONT_SIZE_TITLE_24,
                 fontWeight = FontWeight.Medium
             )
@@ -56,7 +58,7 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
         return
     }
 
-    val pictureUrl = user.picture.large.orPlaceholder("https://via.placeholder.com/150")
+    val pictureUrl = user.picture.large.orPlaceholder(DEFAULT_USER_PICTURE)
     val scrollState = rememberScrollState()
 
     Column(
@@ -72,7 +74,7 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
 
         Image(
             painter = rememberImagePainter(data = pictureUrl),
-            contentDescription = user.name.firstName.orPlaceholder("Desconocido"),
+            contentDescription = user.name.firstName.orPlaceholder(stringResource(R.string.user_data_placeholder)),
             modifier = Modifier
                 .size(USER_DETAIL_IMAGE_SIZE)
                 .clip(CircleShape),
@@ -82,8 +84,8 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
         Spacer(Modifier.height(SPACER_12))
 
         CustomText(
-            text = "${user.name.firstName.orPlaceholder("Desconocido")}\n${
-                user.name.lastName.orPlaceholder("Desconocido")
+            text = "${user.name.firstName.orPlaceholder(stringResource(R.string.user_data_placeholder))}\n${
+                user.name.lastName.orPlaceholder(stringResource(R.string.user_data_placeholder))
             }",
             fontSize = FONT_SIZE_TITLE_24,
             fontWeight = FontWeight.Medium,
@@ -106,7 +108,7 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
         CustomText(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
-            text = "Dirección",
+            text = stringResource(R.string.user_adress_title),
             fontSize = FONT_SIZE_TITLE_16,
             fontWeight = FontWeight.Bold
         )
@@ -116,9 +118,9 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
         CustomText(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
-            text = "${user.location.street.name.orPlaceholder("N/A")}, ${
+            text = "${user.location.street.name.orPlaceholder(stringResource(R.string.user_data_placeholder))}, ${
                 user.location.street.number.orPlaceholder(
-                    "-"
+                    stringResource(R.string.user_data_placeholder)
                 )
             }",
             fontSize = FONT_SIZE_TITLE_16,
@@ -130,7 +132,7 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
         CustomText(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
-            text = "Fecha de nacimiento",
+            text = stringResource(R.string.user_birthday_title),
             fontSize = FONT_SIZE_TITLE_16,
             fontWeight = FontWeight.Bold
         )
@@ -150,7 +152,7 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
         CustomText(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
-            text = "Teléfono",
+            text = stringResource(R.string.user_phone_title),
             fontSize = FONT_SIZE_TITLE_16,
             fontWeight = FontWeight.Bold
         )
@@ -160,7 +162,7 @@ fun UserDetailScreen(sharedViewModel: SharedUserViewModel) {
         CustomText(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
-            text = user.phone.orPlaceholder("-"),
+            text = user.phone.orPlaceholder(stringResource(R.string.user_data_placeholder)),
             fontSize = FONT_SIZE_TITLE_16,
             fontWeight = FontWeight.Normal
         )

@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">ChallengeGalicia</string>
+    <string name="user_list_search_placeholder">Buscar por país o nombre…</string>
+    <string name="user_list_empty_state_title">No se encontraron usuarios o aún cargando…</string>
+    <string name="user_data_placeholder">-</string>
+    <string name="user_list_email_placeholder">xxxx@xxxx.xxx</string>
+    <string name="user_list_favorites_message">El usuario fue agregado a favoritos</string>
+    <string name="user_list_favorite_content_description">Favorito</string>
+    <string name="user_age_title">Edad:\u0020</string>
+    <string name="user_country_title">Pais:\u0020</string>
+    <string name="user_email_title">Email:\u0020</string>
+    <string name="user_adress_title">Dirección</string>
+    <string name="user_birthday_title">Fecha de nacimiento</string>
+    <string name="user_phone_title">Teléfono</string>
+    <string name="user_detail_empty_state_title">No se pudo cargar el usuario</string>
+    <string name="app_bar_button_title">Ir a favoritos</string>
+    <string name="app_bar_back_button_content_description">Volver</string>
+    <string name="app_bar_user_title">Usuarios</string>
+    <string name="app_bar_fav_title">Favoritos</string>
+    <string name="app_bar_profile_title">Perfil</string>
 </resources>

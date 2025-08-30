@@ -22,8 +22,13 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.challengegalicia.ui.theme.azulOscuro
+import com.example.challengegalicia.utils.Constants.DIVIDER_LINE_THICKNESS
+import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_24
+import com.example.challengegalicia.utils.Constants.PADDING_8
 import com.example.challengegalicia.utils.Constants.ROUND_CORNER_12
 import com.example.challengegalicia.utils.CustomText
 
@@ -75,19 +80,18 @@ fun CommonTopBar(
     navController: NavHostController,
     currentRoute: String?
 ) {
-    val azulOscuro = Color(0xFF001F5B)
 
     TopAppBar(
         title = {
             CustomText(
                 text = when (currentRoute) {
-                    MainScreens.UserList.route -> "Usuarios"
-                    MainScreens.Detail.route -> "Perfil"
-                    MainScreens.Favorites.route -> "Favoritos"
+                    MainScreens.UserList.route -> stringResource(R.string.app_bar_user_title)
+                    MainScreens.Detail.route -> stringResource(R.string.app_bar_profile_title)
+                    MainScreens.Favorites.route -> stringResource(R.string.app_bar_fav_title)
                     else -> ""
                 },
                 color = Color.White,
-                fontSize = 24.sp
+                fontSize = FONT_SIZE_TITLE_24
 
             )
         },
@@ -96,7 +100,7 @@ fun CommonTopBar(
                 IconButton(onClick = { navController.popBackStack() }) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Volver",
+                        contentDescription = stringResource(R.string.app_bar_back_button_content_description),
                         tint = Color.White
                     )
                 }
@@ -111,12 +115,11 @@ fun CommonTopBar(
                         contentColor = Color.White
                     ),
                     shape = RoundedCornerShape(ROUND_CORNER_12),
-                    elevation = ButtonDefaults.buttonElevation(4.dp),
-                    border = BorderStroke(1.dp, Color.White),
-                    modifier = Modifier.padding(end = 8.dp) // 👈 acá el padding derecho
+                    border = BorderStroke(DIVIDER_LINE_THICKNESS, Color.White),
+                    modifier = Modifier.padding(end = PADDING_8)
 
                 ) {
-                    Text("Ir a favoritos")
+                    Text(stringResource(R.string.app_bar_button_title))
                 }
             }
         },
