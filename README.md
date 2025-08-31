@@ -25,7 +25,7 @@ com.example.challengegalicia
 ## Capturas de pantalla
 
 ### Lista de usuarios
-![Lista de usuarios](screenshots/user_list.png)
+![Lista de usuarios](./screenshots/user_list.png)
 
 ### Detalle de usuario
 ![Detalle de usuario](screenshots/user_detail.png)
