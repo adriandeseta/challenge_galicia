@@ -22,13 +22,3 @@ com.example.challengegalicia
 │   └── utils                # Clases utilitarias
 ├── ChallengeGaliciaApplication.kt   # Clase Application
 └── MainActivity.kt                  # Activity principal con Compose Navigation
-## Capturas de pantalla
-
-### Lista de usuarios
-![Lista de usuarios](./screenshots/user_list.png)
-
-### Detalle de usuario
-![Detalle de usuario](screenshots/user_detail.png)
-
-### Favoritos
-![Favoritos](screenshots/favorites.png)
