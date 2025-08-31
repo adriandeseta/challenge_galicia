@@ -85,6 +85,7 @@ object Constants {
     val FONT_SIZE_TITLE_16 = 16.sp
     val ROUND_CORNER_12 = 12.dp
     val PADDING_24 = 24.dp
+    val PADDING_16 = 16.dp
     val PADDING_8 = 8.dp
     val SPACER_18 = 18.dp
     val SPACER_12 = 12.dp

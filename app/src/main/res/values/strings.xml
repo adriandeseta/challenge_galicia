@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">ChallengeGalicia</string>
     <string name="user_list_search_placeholder">Buscar por país o nombre…</string>
-    <string name="user_list_empty_state_title">No se encontraron usuarios o aún cargando…</string>
+    <string name="user_list_empty_state_title">No se encontraron usuarios</string>
     <string name="user_data_placeholder">-</string>
+    <string name="user_list_error_title">Error:</string>
+    <string name="user_list_error_message">Error desconocido</string>
     <string name="user_list_email_placeholder">xxxx@xxxx.xxx</string>
-    <string name="user_list_add_favorites_message">El usuario fue agregado a favoritos</string>
-    <string name="user_list_add_remove_favorites_placeholder_remove">Quitar de favoritos</string>
+    <string name="user_list_add_favorites_message">Agregado a favoritos</string>
+    <string name="user_list_add_remove_favorites_placeholder_remove">Eliminado de favoritos</string>
     <string name="user_list_add_remove_favorites_placeholder_add">Agregar a favoritos</string>
     <string name="user_list_remove_favorites_message">El usuario fue removido de favoritos</string>
     <string name="user_list_favorite_content_description">Favorito</string>
