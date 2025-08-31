@@ -1,6 +1,6 @@
 # Challenge Galicia App
 
-Aplicación Android desarrollada con **Jetpack Compose** y arquitectura **MVVM**, diseñada para mostrar una lista de usuarios, sus detalles y favoritos. La UI utiliza **states** para controlar cambios dinámicos de la interfaz de manera reactiva.
+Aplicación Android desarrollada con **Jetpack Compose** y arquitectura **MVVM**, diseñada para mostrar una lista de usuarios que se consumen desde https://randomuser.me/api. La UI utiliza **States** para controlar cambios dinámicos de la interfaz de manera reactiva. Tambien persistimos los usuarios favoritos utilizando **Room** y **Paging3** para cargar la lista de manera eficiente.
 
 ## Estructura del proyecto
 
