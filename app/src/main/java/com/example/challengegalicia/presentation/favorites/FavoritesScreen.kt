@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
@@ -26,13 +24,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.challengegalicia.R
 import com.example.challengegalicia.data.local.FavoriteUserEntity
 import com.example.challengegalicia.utils.Constants.DIVIDER_LINE_THICKNESS
-import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_24
+import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_18
+import com.example.challengegalicia.utils.Constants.LINE_HEIGHT
+import com.example.challengegalicia.utils.Constants.PADDING_24
 import com.example.challengegalicia.utils.Constants.PADDING_8
+import com.example.challengegalicia.utils.Constants.SPACER_18
+import com.example.challengegalicia.utils.Constants.SPACER_200
 import com.example.challengegalicia.utils.CustomText
 
 @Composable
@@ -45,7 +48,8 @@ fun FavoritesScreen(favoritesViewModel: FavoritesViewModel) {
             .background(Color.White)
     ) {
         when (state) {
-            is FavoritesUiState.Idle -> { /* Nada o placeholder */ }
+            is FavoritesUiState.Idle -> { /* Nada o placeholder */
+            }
 
             is FavoritesUiState.Loading -> {
                 CircularProgressIndicator(
@@ -69,23 +73,32 @@ fun FavoritesScreen(favoritesViewModel: FavoritesViewModel) {
                         visible = true,
                         enter = fadeIn()
                     ) {
+
                         Column(
-                            modifier = Modifier.align(Alignment.Center).fillMaxSize(),
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center
+                            verticalArrangement = Arrangement.Top
                         ) {
+                            Spacer(modifier = Modifier.height(SPACER_200))
+
                             Icon(
-                                imageVector = Icons.Default.AddCircle,
+                                imageVector = Icons.Default.Favorite,
                                 contentDescription = null,
-                                modifier = Modifier.size(120.dp),
-                                tint = Color.Gray
+                                modifier = Modifier.size(90.dp),
+                                tint = Color.LightGray
                             )
-                            Spacer(modifier = Modifier.height(16.dp))
+                            Spacer(modifier = Modifier.height(SPACER_18))
                             CustomText(
+                                modifier = Modifier.padding(horizontal = PADDING_24),
                                 text = stringResource(R.string.empty_favorites_message),
                                 color = Color.Gray,
                                 textAlign = TextAlign.Center,
-                                fontSize = FONT_SIZE_TITLE_24
+                                fontSize = FONT_SIZE_TITLE_18,
+                                style = TextStyle(
+                                    lineHeight = LINE_HEIGHT
+                                )
                             )
                         }
                     }
@@ -108,6 +121,7 @@ fun FavoritesScreen(favoritesViewModel: FavoritesViewModel) {
         }
     }
 }
+
 sealed class FavoritesUiState {
     data object Idle : FavoritesUiState()
     data object Loading : FavoritesUiState()

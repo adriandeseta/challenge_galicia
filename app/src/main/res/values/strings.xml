@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ChallengeGalicia</string>
     <string name="user_list_search_placeholder">Buscar por país o nombre…</string>
-    <string name="user_list_empty_state_title">No se encontraron usuarios</string>
+    <string name="user_list_empty_state_title">No encontramos usuarios que coincidan con tu búsqueda</string>
     <string name="user_data_placeholder">-</string>
     <string name="user_list_error_title">Error:</string>
     <string name="user_list_error_message">Error desconocido</string>
@@ -9,7 +9,7 @@
     <string name="user_list_add_favorites_message">Agregado a favoritos</string>
     <string name="user_list_add_remove_favorites_placeholder_remove">Eliminado de favoritos</string>
     <string name="user_list_add_remove_favorites_placeholder_add">Agregar a favoritos</string>
-    <string name="empty_favorites_message">No hay favoritos aún</string>"
+    <string name="empty_favorites_message">Aqui veras tus Favoritos.\nToca el \u2764 del usuario que quieras agregar \ny empieza a guardar</string>"
     <string name="user_list_remove_favorites_message">Eliminado de favoritos</string>
     <string name="user_list_favorite_content_description">Favorito</string>
     <string name="user_age_title">Edad:\u0020</string>

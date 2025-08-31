@@ -82,11 +82,13 @@ fun String?.formatDateOrPlaceholder(placeholder: String = "No disponible"): Stri
 
 object Constants {
     val FONT_SIZE_TITLE_24 = 24.sp
+    val FONT_SIZE_TITLE_18 = 18.sp
     val FONT_SIZE_TITLE_16 = 16.sp
     val ROUND_CORNER_12 = 12.dp
     val PADDING_24 = 24.dp
     val PADDING_16 = 16.dp
     val PADDING_8 = 8.dp
+    val SPACER_200 = 200.dp
     val SPACER_18 = 18.dp
     val SPACER_12 = 12.dp
     val SPACER_4 = 4.dp
@@ -94,4 +96,5 @@ object Constants {
     val USER_DETAIL_IMAGE_SIZE = 120.dp
     val DIVIDER_LINE_THICKNESS = 1.dp
     const val DEFAULT_USER_PICTURE = "https://placehold.co/400"
+    val LINE_HEIGHT = 28.sp
 }

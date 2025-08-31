@@ -13,7 +13,8 @@ pagingCompose = "3.3.2" # última estable
 hilt = "2.51.1"
 retrofit = "2.11.0" # última estable
 coilCompose = "2.7.0" # última estable
-hiltNavigationCompose = "1.2.0" # está ok
+hiltNavigationCompose = "1.2.0"
+firebaseFirestoreKtx = "26.0.0" # está ok
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +41,7 @@ dagger-hilt-navigation = { module = "androidx.hilt:hilt-navigation-compose", ver
 
 retrofit2-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

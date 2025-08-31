@@ -4,15 +4,21 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -25,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
@@ -37,11 +44,15 @@ import com.example.challengegalicia.presentation.favorites.FavoritesViewModel
 import com.example.challengegalicia.presentation.model.UserModel
 import com.example.challengegalicia.utils.Constants.DIVIDER_LINE_THICKNESS
 import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_16
+import com.example.challengegalicia.utils.Constants.FONT_SIZE_TITLE_18
+import com.example.challengegalicia.utils.Constants.LINE_HEIGHT
 import com.example.challengegalicia.utils.Constants.PADDING_16
 import com.example.challengegalicia.utils.Constants.PADDING_24
 import com.example.challengegalicia.utils.Constants.PADDING_8
 import com.example.challengegalicia.utils.Constants.ROUND_CORNER_12
+import com.example.challengegalicia.utils.Constants.SPACER_12
 import com.example.challengegalicia.utils.Constants.SPACER_18
+import com.example.challengegalicia.utils.Constants.SPACER_4
 import com.example.challengegalicia.utils.CustomText
 import com.example.challengegalicia.utils.figtreeFontFamily
 import kotlinx.coroutines.flow.Flow
@@ -162,18 +173,34 @@ fun UserList(
         }
 
         users.itemCount == 0 -> {
+            Spacer(modifier = Modifier.height(SPACER_12))
+
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(PADDING_24),
-                contentAlignment = Alignment.Center
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.TopCenter
             ) {
-                CustomText(
-                    text = stringResource(R.string.user_list_empty_state_title),
-                    color = Color.Black,
-                    textAlign = TextAlign.Center
-                )
+                Row(
+                    modifier = Modifier.padding(horizontal = PADDING_24),
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp),
+                        tint = Color.Gray
+                    )
+                    Spacer(modifier = Modifier.width(SPACER_4))
+                    CustomText(
+                        text = stringResource(R.string.user_list_empty_state_title),
+                        color = Color.Gray,
+                        textAlign = TextAlign.Start,
+                        fontSize = FONT_SIZE_TITLE_18,
+                        style = TextStyle(
+                            lineHeight = LINE_HEIGHT
+                        )
+                    )
+                }
             }
+
         }
 
         else -> {
